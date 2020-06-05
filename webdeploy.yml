@@ -1,18 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-        name: myweb-deploy
-spec:
-        replicas: 3
-        selector:
-                matchLabels:
-                        env: production
-        template:
-                metadata:
-                        name: myweb-prod
-                        labels:
-                                env: production
-                spec:
-                        containers:
-                                name: myweb-con
-                                image: mykgod/httpd-php-server
+metadata: 
+  name: myweb-deploy
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels: 
+      env: production
+  strategy: 
+    type: RollingUpdate
+  template: 
+    metadata: 
+      name: myweb-prod
+      labels: 
+        env: production
+    spec: 
+      containers: 
+      - image: mykgod/httpd-php-server
+        name: myweb-con
